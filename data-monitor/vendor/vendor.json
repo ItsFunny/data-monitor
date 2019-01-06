@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "ZZoq2rL0hPTsWAi/PSo9ogss/vE=",
+			"path": "github.com/pebbe/zmq4",
+			"revision": "3515f4e6f439e167f92f2b99a9497cf5ea8e3cea",
+			"revisionTime": "2018-08-25T21:32:44Z"
+		}
+	],
+	"rootPath": "data-monitor/data-monitor"
+}
