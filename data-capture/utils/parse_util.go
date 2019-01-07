@@ -4,5 +4,3 @@ type ByteStream struct {
 	data   []byte
 	offset int
 }
-
-

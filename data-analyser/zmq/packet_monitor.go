@@ -1,30 +1,30 @@
 package zmq
 
-import "C"
 import (
+	"data-monitor/data-common/utils"
 	"github.com/pebbe/zmq4"
-	"go_dlxy/dlxy_common/constants"
 )
 
 // 监听消息,获取packet
-type ZmqPakcetClient struct {
+type ZmqPacketClient struct {
 	zmqPacketClient *zmq4.Socket
 	stopFlag        bool
+	lastRecvError   error
 }
 
-func (c *ZmqPakcetClient) Init(zmqType zmq4.Type, params map[string]string) {
+func (c *ZmqPacketClient) Init(zmqType zmq4.Type, params map[string]string) {
 	ctx, err := zmq4.NewContext()
 	if nil != err {
 		panic(err)
 	}
 	c.zmqPacketClient, err = ctx.NewSocket(zmqType)
 	if zmqType == zmq4.SUB {
-		if topic := params["topic"]; "" != topic {
+		if topic, ok := params["topic"]; ok {
 			if err = c.zmqPacketClient.SetSubscribe(topic); nil != err {
 				panic(err)
 			}
 		} else {
-			panic(constants.MissingArgumentError("subscribe topic"))
+			panic(utils.MissingArgument("subscribe topic"))
 		}
 	}
 	if nil != err {
@@ -32,7 +32,7 @@ func (c *ZmqPakcetClient) Init(zmqType zmq4.Type, params map[string]string) {
 	}
 	serverAddr := params["serverAddr"]
 	if serverAddr == "" {
-		panic(constants.MissingArgumentError("serverAddr"))
+		panic(utils.MissingArgument("serverAddr"))
 	}
 	err = c.zmqPacketClient.Connect(serverAddr)
 	if nil != err {
@@ -40,10 +40,14 @@ func (c *ZmqPakcetClient) Init(zmqType zmq4.Type, params map[string]string) {
 	}
 }
 
-func (c *ZmqPakcetClient) Recv() {
+func (c *ZmqPacketClient) Recv() ([]byte, error) {
+	return c.zmqPacketClient.RecvBytes(0)
+}
 
-	msg, err := c.zmqPacketClient.RecvMessage(0)
-	if nil!=err{
-
+func (c *ZmqPacketClient) Close() error {
+	if nil != c {
+		return c.Close()
 	}
+
+	return nil
 }

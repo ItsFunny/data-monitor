@@ -10,7 +10,7 @@ import (
 var log = logrus.New()
 
 type CaptureConfig struct {
-	ifaces[] string // 绑定的设备名称
+	ifaces []string // 绑定的设备名称
 
 }
 
