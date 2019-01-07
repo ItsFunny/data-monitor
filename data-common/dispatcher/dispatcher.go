@@ -1,7 +1,7 @@
 package dispatcher
 
 import (
-	"data-monitor/data-capture/interfaces"
+	"data-monitor/data-common/interfaces"
 	"io"
 	"log"
 )

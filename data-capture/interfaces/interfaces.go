@@ -10,9 +10,3 @@ type CaptureInterface interface {
 type PacketHandlerInterface interface {
 	Handle([]byte)
 }
-
-type Worker interface {
-	io.Closer
-	Consume(interface{})
-	Start()
-}
