@@ -10,7 +10,7 @@ type PacketAnalyserDispatcher struct {
 }
 
 // 2019-01-07 23:15 这个是分析具体的packet的执行者
-type PacketAnalyserWorer struct {
+type PacketAnalyserWorker struct {
 	interfaces.BaseWoker
 }
 func (a *PacketAnalyserDispatcher)consume(value interface{})error{

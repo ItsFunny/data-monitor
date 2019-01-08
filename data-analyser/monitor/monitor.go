@@ -2,6 +2,7 @@ package monitor
 
 import (
 	"encoding/json"
+
 	"github.com/pebbe/zmq4"
 
 	"data-monitor/data-analyser/zmq"
@@ -15,11 +16,11 @@ type Monitor struct {
 
 // 需要从配置文件中获取配置
 func (m *Monitor) init() {
+	// 从配置文件中拉取
 	params := make(map[string]string)
 	params["serverAddr"] = "127.0.0.1:10000"
 	params["topic"] = "packet"
 	m.zmqPacketClient.Init(zmq4.SUB, params)
-
 }
 
 func (m *Monitor) Start() {
@@ -33,6 +34,7 @@ func (m *Monitor) Start() {
 			packet := &models.Packet{}
 			e = json.Unmarshal(bytes, packet)
 			if nil != e {
+				// 往日志服务器中发送消息
 
 			} else {
 				// 处理packet

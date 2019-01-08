@@ -48,6 +48,5 @@ func (c *ZmqPacketClient) Close() error {
 	if nil != c {
 		return c.Close()
 	}
-
 	return nil
 }
