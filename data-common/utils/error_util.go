@@ -12,3 +12,7 @@ func MissingArgumentError(key, value string) error {
 func MissingArgument(v string) error {
 	return errors.New(fmt.Sprintf("missing argument:%v", v))
 }
+
+func ParseError(key, value interface{}) error {
+	return errors.New(fmt.Sprintf("when parse %v to %v occur error", value, key))
+}
